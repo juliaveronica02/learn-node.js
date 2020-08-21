@@ -37,7 +37,7 @@ module.exports = {
                   .save()
                   .then((result) => {
                     if (req.body.password !== req.body.passwordConfirm) {
-                      res.json("Password undefined");
+                      res.json("Password not match!");
                     } else {
                       req.body.password == req.body.passwordConfirm;
                       res.json(result);
@@ -74,7 +74,7 @@ module.exports = {
               );
               // return success.
               res.status(200).send({
-                message: "Admin session",
+                message: "Admin session!",
                 role: "admin",
                 username,
                 token,
@@ -99,13 +99,13 @@ module.exports = {
         } else {
           res.status(404).send({
             message:
-              "Sorry, username and password doesnt exist. Please register before login!",
+              "Sorry, username and password doesn't exist. Please register before login!",
           });
         }
       });
     } else {
       res.status(417).send({
-        message: "Please specify username and password",
+        message: "Please specify username and password!",
       });
     }
   },
@@ -142,22 +142,22 @@ module.exports = {
             bcrypt.compare(password, admin.password).then((response) => {
               if (response) {
                 Admin.destroy({ where: { id: id } }).then(() =>
-                  res.status(200).send({ message: "Account deleted" })
+                  res.status(200).send({ message: "Account deleted!" })
                 );
               } else {
                 res.status(404).send({
-                  message: "Wrong password",
+                  message: "Wrong password!",
                 });
               }
             });
           } else {
-            res.status(417).send({ message: "Please input password" });
+            res.status(417).send({ message: "Please input password!" });
           }
         } else {
-          res.status(404).send({ message: "Admin doesnt exist" });
+          res.status(404).send({ message: "Admin doesn't exist!" });
         }
       });
-    } else res.status(417).send({ message: "Please specify Admin ID" });
+    } else res.status(417).send({ message: "Please specify Admin ID!" });
   },
   // update admin by id.
   updateDataById: (req, res) => {
@@ -181,27 +181,27 @@ module.exports = {
               })
               .then(() => {
                 res.status(200).send({
-                  message: "Profile updated",
+                  message: "Profile updated!",
                 });
               });
           } else {
             res.status(417).send({
-              message: "Please specify password field and email",
+              message: "Please specify password field and email!",
             });
           }
         } else {
           res.status(417).send({
-            message: "Admin NOT found",
+            message: "Admin NOT found!",
           });
         }
       });
     } else {
       res.status(417).send({
-        message: "Please specify Admin ID",
+        message: "Please specify Admin ID!",
       });
     }
   },
   logout: (req, res) => {
-    res.status(200).send({ message: "Logout successfully" });
+    res.status(200).send({ message: "Logout successfully!" });
   },
 };
