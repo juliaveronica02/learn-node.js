@@ -1,0 +1,25 @@
+import request from '../../helpers/axios'
+
+const getUsers = (param, token) => {
+  return new Promise((resolve, reject) => {
+    request
+      .get(`/users${param}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        const users = response.data.user.map((users) => {
+          return users
+        })
+        resolve(users)
+
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+
+}
+
+export default getUsers
