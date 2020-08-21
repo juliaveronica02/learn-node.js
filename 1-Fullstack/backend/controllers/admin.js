@@ -1,5 +1,5 @@
 const Models = require("../models");
-const User = Models.user;
+const Admin = Models.admin;
 const Logging = Models.logging;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -7,29 +7,33 @@ const privateKey = "null";
 const saltRounds = 12;
 
 module.exports = {
+    show: (req, res) => {
+        User.findAll({ attributes: { exclude: ["password"] } }).then(data =>
+          res.status(200).send(data)
+        );
+      },
   register: (req, res, next) => {
-    User.findOne({ where: { email: req.body.email } }).then((user) => {
-      if (user) {
+    Admin.findOne({ where: { email: req.body.email } }).then((admin) => {
+      if (admin) {
         return res.status(401).json({ email: "Email already exists!" });
       } else {
-        User.findOne({ where: { phone: req.body.phone } }).then((user) => {
-          if (user) {
-            return res.status(402).json({ phone: "Phone already exists!" });
+        Admin.findOne({ where: { username: req.body.username } }).then((admin) => {
+          if (admin) {
+            return res.status(402).json({ username: "Username already exists!" });
           } else {
-            const newUser = new User({
+            const newAdmin = new Admin({
               username: req.body.username,
               email: req.body.email,
-              phone: req.body.phone,
+              fullname: req.body.fullname,
               password: req.body.password,
               passwordConfirm: req.body.passwordConfirm,
-              address: req.body.address,
             });
             //hash password.
             bcrypt.genSalt(saltRounds, function (err, salt) {
-              bcrypt.hash(newUser.password, salt, function (err, hash) {
+              bcrypt.hash(newAdmin.password, salt, function (err, hash) {
                 if (err) throw err;
-                newUser.password = hash;
-                newUser
+                newAdmin.password = hash;
+                newAdmin
                   .save()
                   .then((result) => {
                     if (req.body.password !== req.body.passwordConfirm) {
@@ -49,21 +53,19 @@ module.exports = {
       }
     });
   },
-  // user login.
+  // admin login.
   login: (req, res, next) => {
     const { username, password } = req.body; //simple one.
     if (username && password) {
-      User.findOne({ where: { username: username } }).then((user) => {
-        if (user) {
-          bcrypt.compare(password, user.password).then((response) => {
-            // create user id when register.
-            const { id } = user;
+      Admin.findOne({ where: { username: username } }).then((admin) => {
+        if (admin) {
+          bcrypt.compare(password, admin.password).then((response) => {
             if (response) {
               const token = jwt.sign(
                 {
                   username,
                   // role.
-                  role: "user",
+                  role: "admin",
                 },
                 privateKey,
                 {
@@ -72,17 +74,16 @@ module.exports = {
               );
               // return success.
               res.status(200).send({
-                message: "User session",
-                role: "user",
-                id,
+                message: "Admin session",
+                role: "admin",
                 username,
                 token,
               });
               // create login.
               return Logging.create({
-                idUser: id,
-                username: user.username,
-                role: "user",
+                idUser: admin.id,
+                username: admin.username,
+                role: "admin",
                 token,
                 createdAt: new Date() + 7,
                 updatedAt: new Date() + 7,
@@ -108,15 +109,15 @@ module.exports = {
       });
     }
   },
-  // get all user data.
+  // get all admin data.
   getData: (req, res) => {
-    User.findAll({})
+    Admin.findAll({})
       .then((result) => res.json(result))
       .catch((err) => res.json(err));
   },
-  // get user by id.
+  // get admin by id.
   getDataById: (req, res) => {
-    User.findOne({ where: { id: req.params.userId } })
+    Admin.findOne({ where: { id: req.params.adminId } })
       .then((result) => res.json(result))
       .catch((err) => {
         throw err;
@@ -124,23 +125,23 @@ module.exports = {
   },
   // delete user data by id.
   deleteDataById: (req, res) => {
-    User.destroy({ where: { id: req.params.userId } })
+    Admin.destroy({ where: { id: req.params.adminId } })
       .then(() =>
-        res.status.json({ msg: "User has been deleted successfully!" })
+        res.status.json({ msg: "Admin has been deleted successfully!" })
       )
       .catch((err) => res.status(500).json({ msg: "Failed to delete!" }));
   },
   // delete account using password.
-  deleteAccount: async (req, res) => {
+  deleteAccount:(req, res) => {
     const id = Number(req.params.id);
     const { password } = req.body;
     if (id) {
-      User.findByPk(id).then((users) => {
-        if (users) {
+      Admin.findByPk(id).then((admin) => {
+        if (admin) {
           if (password) {
-            bcrypt.compare(password, users.password).then((response) => {
+            bcrypt.compare(password, admin.password).then((response) => {
               if (response) {
-                User.destroy({ where: { id: id } }).then(() =>
+                Admin.destroy({ where: { id: id } }).then(() =>
                   res.status(200).send({ message: "Account deleted" })
                 );
               } else {
@@ -153,29 +154,26 @@ module.exports = {
             res.status(417).send({ message: "Please input password" });
           }
         } else {
-          res.status(404).send({ message: "User doesnt exist" });
+          res.status(404).send({ message: "Admin doesnt exist" });
         }
       });
-    } else res.status(417).send({ message: "Please specify User ID" });
+    } else res.status(417).send({ message: "Please specify Admin ID" });
   },
-  // update user by id.
+  // update admin by id.
   updateDataById: (req, res) => {
     const { id } = req.params;
     const { password, email, username, phone, address } = req.body;
     if (id) {
-      User.findOne({ where: { id: id } }).then((user) => {
-        if (user) {
+      Admin.findOne({ where: { id: id } }).then((admin) => {
+        if (admin) {
           if (password && email) {
             bcrypt
               .hash(password, saltRounds)
               .then((hash) => {
-                User.update(
+                Admin.update(
                   {
                     email,
                     password: hash,
-                    username,
-                    phone,
-                    address,
                     updatedAt: new Date() + 7,
                   },
                   { where: { id: id } }
@@ -193,13 +191,13 @@ module.exports = {
           }
         } else {
           res.status(417).send({
-            message: "No user found",
+            message: "Admin NOT found",
           });
         }
       });
     } else {
       res.status(417).send({
-        message: "Please specify User ID",
+        message: "Please specify Admin ID",
       });
     }
   },

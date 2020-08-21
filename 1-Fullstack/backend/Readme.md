@@ -14,3 +14,10 @@ NOTE: Before sequelize db:migrate must add migrations role enum.
 * select * from users; (show users data when register).
 * desc loggings; (show login tables).
 * select * from loggings;
+
+## Re-create database.
+* drop database 1 fullstack; (on mysql).
+* sequelize db:migrate.
+## Run.
+* nodemon start.
+* test API using postman.

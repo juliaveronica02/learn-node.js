@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const controller = require("../controllers/user");
+const controller = require("../controllers/admin");
 const authToken = require("../authentication/index");
 
-router.get("/verifytoken", authToken.verifyTokenAsUser, authToken.valid);
-router.get("/verifylogin", authToken.verifyLogin);
+router.get("/verifytoken", authToken.verifyTokenAsAdmin, authToken.valid);
+router.get("/", authToken.verifyTokenAsAdmin, controller.show);
 
 // router.get("/show", authToken.verifyTokenAsUser, controller.getData);
 router.get("/show", controller.getData);
