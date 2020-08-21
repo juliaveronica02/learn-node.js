@@ -11,7 +11,7 @@ const controller ={
         const {name,email,phone,comments} = req.body
         Feedback.create({
             name,email,phone,comments
-        }).then(feedback => res.status(200).send({message:"Thank you for your feedback"}))        
+        }).then(feedback => res.status(200).send({message:"Thank you, for your feedback!"}))        
     }
 }
 
