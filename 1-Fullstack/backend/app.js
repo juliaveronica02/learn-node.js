@@ -8,6 +8,7 @@ const cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var feedbackRouter = require('./routes/feedback');
 
 var app = express();
 
@@ -30,5 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admins', adminRouter);
+app.use('/feedback', feedbackRouter);
 
 module.exports = app;
