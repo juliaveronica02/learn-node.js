@@ -57,3 +57,6 @@ routes: This is the directory where we will build out the RESTful routes for our
 * install heroku toolbelt.
 * linux: wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh.
 * login to heroku account: $ heroku login - email - password - press Yes if not find an existing public key - uploading ssh public key - finish.
+
+## remove git.
+rm -rf .git.
