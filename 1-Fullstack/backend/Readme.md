@@ -21,3 +21,22 @@ NOTE: Before sequelize db:migrate must add migrations role enum.
 ## Run.
 * nodemon start.
 * test API using postman.
+
+## node.js structure.
+```
+app.js    node_modules/ public/   views/
+bin/    package.json  routes/
+```
+* app.js
+ - Sets the path to the dir where the view files are located:
+   ```
+   app.set('views', path.join(__dirname, 'views'));
+   ```
+ - Sets the path to the dir with static assets:
+   ```
+   app.use(express.static(path.join(__dirname, 'public')));
+   ```
+ - Sets the root route for the app:
+   ```
+   app.use('/', routes);
+   ```
