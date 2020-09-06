@@ -27,7 +27,7 @@ NOTE: Before sequelize db:migrate must add migrations role enum.
 app.js    node_modules/ public/   views/
 bin/    package.json  routes/
 ```
-* app.js
+app.js
  - Sets the path to the dir where the view files are located:
    ```
    app.set('views', path.join(__dirname, 'views'));
