@@ -10,14 +10,14 @@ Yang kita inginkan adalah web yang memiliki tampilan juga.
 
 Dengan Express, ada 2 jalan yang tersedia:
 
-1. Membuat backend (REST API) dahulu lalu membuat frontend (HTML, CSS, JS) dalam sistemnya masing-masing, ataupun dengan urutan sebaliknya
-2. Membuat backend dan frontend sekaligus dalam sistem yang sama dan pada waktu yang sama
+1. Membuat backend (REST API) dahulu lalu membuat frontend (HTML, CSS, JS) dalam sistemnya masing-masing, ataupun dengan urutan sebaliknya.
+2. Membuat backend dan frontend sekaligus dalam sistem yang sama dan pada waktu yang sama.
 
 Di sini sebagai permulaan, kita bisa langsung terjun ke cara kedua.
 
 --------------------------------------------------------------------------------
 
-## Create a full blown web app with generator
+## Create a full blown web app with generator.
 
 Kita bisa meng-generate aplikasi Express lebih instan dengan [Express application generator](https://www.npmjs.com/package/express-generator).
 
@@ -112,32 +112,32 @@ Pada bagian awal kode-nya, terlihat bahwa `www` mengimpor file `../app` (atau `.
 Tujuan file `www` ini hanyalah untuk konfigurasi semata.
 
 ```js
-// Module dependencies
+// Module dependencies.
 var app = require('../app');
 var debug = require('debug')('app:server');
 var http = require('http');
 
-// Get port from environment and store in Express
+// Get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-// Create HTTP server
+// Create HTTP server.
 var server = http.createServer(app);
 
-// Listen on provided port, on all network interfaces
+// Listen on provided port, on all network interfaces.
 server.listen(port);
 ```
 
-1. Dependency di-load
-2. Konfigurasi variabel `PORT`
-3. Membuat HTTP server dari dependency
-4. Menjalankan server tersebut dengan port yang sudah diatur
+1. Dependency di-load.
+2. Konfigurasi variabel `PORT`.
+3. Membuat HTTP server dari dependency.
+4. Menjalankan server tersebut dengan port yang sudah diatur.
 
 Sisanya hanyalah function untuk berbagai kondisi tertentu.
 
 --------------------------------------------------------------------------------
 
-## Inside generated Express structure (2)
+## Inside generated Express structure (2).
 
 Pada aplikasi Express umumnya ada berbagai dependency esensial berikut yang mana sebagian juga merupakan plugin atau middleware untuk Express.
 
@@ -154,12 +154,12 @@ Pada aplikasi Express umumnya ada berbagai dependency esensial berikut yang mana
 }
 ```
 
-* `body-parser` - mem-parsing HTTP request body yang berasal dari client ke server
-* `cookie-parser` - mem-parsing HTTP cookie header
-* `debug` - utility untuk debugging 
-* `jade` (sekarang juga disebut `pug`) - view/template engine untuk menyusun merender HTML yang modular di server, terdapat beberapa file ekstensi `.jade` di project kita
-* `morgan` - plugin untuk logging HTTP request
-* `serve-favicon` - plugin untuk menyajikan favicon dari server
+* `body-parser` - mem-parsing HTTP request body yang berasal dari client ke server.
+* `cookie-parser` - mem-parsing HTTP cookie header.
+* `debug` - utility untuk debugging .
+* `jade` (sekarang juga disebut `pug`) - view/template engine untuk menyusun merender HTML yang modular di server, terdapat beberapa file ekstensi `.jade` di project kita.
+* `morgan` - plugin untuk logging HTTP request.
+* `serve-favicon` - plugin untuk menyajikan favicon dari server.
 
 Untuk lebih lengkapnya bisa lihat satu-satu di `npmjs.com`.
 
@@ -167,23 +167,23 @@ Mulai dari sinilah struktur project hasil generator sangat berperan.
 
 ```sh
 .
-├── app.js # aplikasi utama
+├── app.js # aplikasi utama.
 ├── bin
-│   └── www # konfigurasi utama
+│   └── www # konfigurasi utama.
 ├── package.json
-├── package-lock.json # hanya untuk mengunci versi dependency
-├── public # berbagai file static yang disajikan oleh app.js
-├── routes # berbagai route yang diimpor dan dijalankan oleh app.js
-└── views # berbagai tampilah HTML yang di-render oleh Jade
+├── package-lock.json # hanya untuk mengunci versi dependency.
+├── public # berbagai file static yang disajikan oleh app.js.
+├── routes # berbagai route yang diimpor dan dijalankan oleh app.js.
+└── views # berbagai tampilah HTML yang di-render oleh Jade.
 ```
 
 --------------------------------------------------------------------------------
 
-## Inside generated Express structure (3)
+## Inside generated Express structure (3).
 
 Setelah mengetahui hal penting dari apa yang sudah di-generate, sambil melihat `app.js` secara hati-hati, cara kerja utama aplikasinya kurang lebih:
 
-1. `bin/www` mengonfigurasi untuk menjalankan `app.js`
+1. `bin/www` mengonfigurasi untuk menjalankan `app.js`.
 
 ```js
 var app = require('../app');
@@ -191,7 +191,7 @@ var debug = require('debug')('app:server');
 var http = require('http');
 ```
 
-2. `app.js` mengatur aplikasi secara keseluruhan yang diawali dengan mengimpor berbagai dependency yang sudah diinstal
+2. `app.js` mengatur aplikasi secara keseluruhan yang diawali dengan mengimpor berbagai dependency yang sudah diinstal.
 
 ```js
 var express = require('express');
@@ -202,31 +202,31 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 ```
 
-4. Mengimpor module route yang ada di `routes`
+4. Mengimpor module route yang ada di `routes`.
 
 ```js
 var index = require('./routes/index');
 var users = require('./routes/users');
 ```
 
-5. Meng-instantiate objek `app` dari `express`
+5. Meng-instantiate objek `app` dari `express`.
 
 ```js
 var app = express();
 ```
 
-6. Mengatur view engine dengan Jade
+6. Mengatur view engine dengan Jade.
 
 ```js
-// view engine setup
+// view engine setup.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 ```
 
-7. Menggunakan berbagai plugin yang diperlukan
+7. Menggunakan berbagai plugin yang diperlukan.
 
 ```js
-// uncomment after placing your favicon in /public
+// uncomment after placing your favicon in /public.
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -235,30 +235,30 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 ```
 
-8. Menggunakan module route yang sudah diimpor agar bisa diakses melalui HTTP request
+8. Menggunakan module route yang sudah diimpor agar bisa diakses melalui HTTP request.
 
 ```js
 app.use('/', index);
 app.use('/users', users);
 ```
 
-9. Menangkap error jika perlu dengan bantuan file `views/error.jade` untuk menampilan error dengan format HTML
+9. Menangkap error jika perlu dengan bantuan file `views/error.jade` untuk menampilan error dengan format HTML.
 
 ```js
-// catch 404 and forward to error handler
+// catch 404 and forward to error handler.
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
+// error handler.
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // set locals, only providing error in development.
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // render the error page.
   res.status(err.status || 500);
   res.render('error');
 });
@@ -272,7 +272,7 @@ module.exports = app;
 
 --------------------------------------------------------------------------------
 
-## Handling modular routes and rendering view page
+## Handling modular routes and rendering view page.
 
 Di dalam file `routes/index.js`, bisa kita lihat bahwa ada pengaturan route di path `/`.
 
@@ -337,7 +337,7 @@ router.get('/', function(req, res, next) {
 
 --------------------------------------------------------------------------------
 
-## Handling static assets
+## Handling static assets.
 
 Express dapat memuat berbagai file static apapun yang bukan merupakan program.
 
@@ -353,20 +353,16 @@ Di sini berarti apapun yang ada di folder `public`, maka akan bisa diakses sesua
 
 --------------------------------------------------------------------------------
 
-## Conclusion
+## Conclusion.
 
 Berarti kurang lebih aplikasi Express yang dapat memuat backend dan frontend sekaligus secara lengkap memerlukan dan menjalankan:
 
-1. Konfigurasi
-2. Impor berbagai module
-   * Routes
-   * View
-3. Sajian file static
+1. Konfigurasi.
+2. Impor berbagai module:
+   * Routes.
+   * View.
+3. Sajian file static.
 
 Selebihnya bisa dioprek dulu, nanti juga mengerti.
 
 --------------------------------------------------------------------------------
-
-## Live Code
-
-Terdapat live code via [Glitch](https://glitch.me) di <https://glitch.com/~static-express> yang dapat dilihat hasilnya di <https://static-express.glitch.me> dan source code-nya di <https://glitch.com/edit/#!/static-express>.

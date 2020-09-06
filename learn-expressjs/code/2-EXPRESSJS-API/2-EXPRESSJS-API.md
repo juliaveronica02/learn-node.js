@@ -1,33 +1,30 @@
-# Express.js to Create REST API
+# Express.js to Create REST API.
 
 --------------------------------------------------------------------------------
 
-## Application structure
-
-Secara berurutan, struktur aplikasi Express secara umum dibentuk sebagai berikut:
-
-1. Memasukkan atau mengimpor berbagai dependency dan modul kita seperti controller,
-utility, helper, dan model
-2. Meng-instansiasi objek Express dan lainnya
-3. Menghubungkan ke database
-4. Mengkonfigurasi pengaturan aplikasi Express seperti template engine dan ekstensi file
-5. Mendefinisikan middleware seperti error handler, static files folder, cookies, dan parser lainnya
-6. Mendefinisikan routes dan request handler-nya
-7. Menjalankan aplikasi yang akan memulai server di host dan port tertentu
+## Application structure.
+Express application structure:
+1. import our dependency and module like controllers, utility, helper and model.
+2. install another express object and the others.
+3. connect to database.
+4. confirgure express applications settings like engine template and extention file.
+5. identify middleware like error handler, static files folder, cookies, parser and the others else.
+6. identify routes and the request handle.
+7. run the app from server and certain port.
 
 --------------------------------------------------------------------------------
 
-## Create basic REST API manually
+## Create basic REST API manually.
 
-Direkomendasikan untuk membaca dokumentasi [Express](https://expressjs.com) sebagai persiapan.
+Recommend read express documentations: [Express](https://expressjs.com) as a preparation.
 
-Kita akan mengimplementasi beberapa routes/requests REST API seperti `GET`, `POST`, `PUT`, `DELETE`.
+We will implement some routes/requests REST API seperti `GET`, `POST`, `PUT`, `DELETE`.
 
-Di dalam proyek, akan banyak digunakan method `res.send`/`res.json` untuk mengirim data.
+On project, will recently use method `res.send`/`res.json` for files transfer.
 
 Di sini kita akan membuat API yang dapat menampilkan dan memanipulasi daftar benda yang kita miliki.
 
-### Design the routes dan data model
+### Design the routes dan data model.
 
 Sebelum membuat API-nya, disarankan untuk mendesain routes dan model datanya terlebih dahulu.
 
@@ -73,7 +70,7 @@ Untuk mempermudah pembelajaran, kita belum menggunakan database, melainkan varia
 
 Yang mana memang datanya akan reset lagi jika kita menjalankan ulang aplikasinya.
 
-### Implement the designs
+### Implement the designs.
 
 Kita implementasikan berbagai route tadi dalam Express dengan perlahan:
 
@@ -155,7 +152,7 @@ $ curl -X DELETE localhost:3000/api/items/0
 $ curl -X PUT localhost:3000/api/items/1
 ```
 
-### Implement the data manipulation
+### Implement the data manipulation.
 
 Setelah desain dasar sudah selesai, kita bisa mulai menggabungkan model data dengan logika sesungguhnya.
 
@@ -244,7 +241,3 @@ X-Powered-By: Express
 Karena sumber data masih dalam bentuk JSON, kita bisa mengimplementasikan berbagai logika manipulasi data dengan JavaScript seperti biasa.
 
 --------------------------------------------------------------------------------
-
-## Live Code
-
-Terdapat live code via [Glitch](https://glitch.me) di <https://glitch.com/~rest-api> yang dapat dilihat hasilnya di <https://rest-api.glitch.me> dan source code-nya di <https://glitch.com/edit/#!/rest-api>.
