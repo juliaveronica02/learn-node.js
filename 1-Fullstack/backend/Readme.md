@@ -40,3 +40,20 @@ app.js
    ```
    app.use('/', routes);
    ```
+node_modules: This is the dir where all our npm packages will reside. <br>
+public: Directory for all static assets like images, JavaScript, CSS, fonts, etc ... <br>
+views: Where all your layout and view Jade files will live. <br>
+bin: There is a single file here, www and this is what activate the Node server. <br>
+package.json: Project description, scripts manager and the app manifest and allows us to run npm start or nodemon start. Notice the following object:
+```
+"scripts": {
+  "start": "node ./bin/www"
+},
+```
+routes: This is the directory where we will build out the RESTful routes for our app.
+
+## Heroku.
+* make heroku account.
+* install heroku toolbelt.
+* linux: wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh.
+* login to heroku account: $ heroku login - email - password - press Yes if not find an existing public key - uploading ssh public key - finish.
