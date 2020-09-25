@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import "./books.css";
+import "./books.css";
 import axios from "axios";
 const Books = () => {
   const [data, setData] = useState([]);
@@ -15,7 +15,7 @@ const Books = () => {
     return (
       <tr key={id}>
         <td>
-          <img src={data.image} alt="gambar" />
+          <img className="image" src={`http://localhost:3000/${data.image}`} alt="gambar" />
         </td>
         <td>{data.bookTitle}</td>
         <td>{data.years}</td>
@@ -28,7 +28,7 @@ const Books = () => {
   return (
     <div>
       <table
-        className="table table-dark table-striped table-hover justify-content-center text-center"
+        className="table table-dark table-striped table-hover text-center auto-fix"
         style={{ width: "100%" }}
       >
         <thead>
