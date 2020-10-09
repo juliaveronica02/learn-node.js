@@ -136,6 +136,7 @@ module.exports = {
     const id = Number(req.params.id);
     const { password } = req.body;
     if (id) {
+      // findByPk (find by primary key = id).
       Admin.findByPk(id).then((admin) => {
         if (admin) {
           if (password) {

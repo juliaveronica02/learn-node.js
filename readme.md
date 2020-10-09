@@ -7,5 +7,14 @@
 ##
 * Learn Data-Structured.
 * Learn Algorith.
-* Node.js Quiz
+* learn Express.js.
+* Node.js Quiz.
 * 1-Fullstack (portfolio).
+* 2-Fullstack (portfolio).
+* backend using mongoDB.
+* backend using MySQL.
+* Deploy to AWS as cloud engineer.
+* node-server.
+
+## Core Modules.
+* 
