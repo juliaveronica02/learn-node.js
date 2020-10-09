@@ -14,7 +14,4 @@
 * backend using mongoDB.
 * backend using MySQL.
 * Deploy to AWS as cloud engineer.
-* node-server.
-
-## Core Modules.
-* 
+* Node-js-udemy.
