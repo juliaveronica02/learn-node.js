@@ -1,0 +1,11 @@
+{
+  "name": "node-js-udemy",
+  "version": "1.0.0",
+  "description": "complete nodejs guide!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julia Veronica",
+  "license": "ISC"
+}

@@ -1,8 +1,11 @@
+// 1.
 const http = require('http');
-
+// 2.
 const server = http.createServer((req, res) => {
+  // 4.
   const url = req.url;
   if (url === '/') {
+    // 5. send text by html type.
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
     res.write('<head><title>Assignment 1</title></head>');
@@ -13,6 +16,7 @@ const server = http.createServer((req, res) => {
     return res.end();
   }
   if (url === '/users') {
+    // 6.
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
     res.write('<head><title>Assignment 1</title></head>');
@@ -20,7 +24,7 @@ const server = http.createServer((req, res) => {
     res.write('</html>');
     return res.end();
   }
-  // Send a HTML response with some "Page not found text".
+  // 7. Send a HTML response with some "Page not found text".
   if (url === '/create-user') {
     const body = [];
     req.on('data', chunk => {
@@ -35,5 +39,5 @@ const server = http.createServer((req, res) => {
     res.end();
   }
 });
-
-server.listen(3000);
+// 3. Port.
+server.listen(8000);
