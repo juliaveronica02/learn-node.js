@@ -1,6 +1,8 @@
 ## Folder Structure.
+* assets.
 * understand-nodejs.
 * assignment-solution.
+* sequelize-introduction.
 * sequelize-section.
 
 ## Global Features vs Core Modules vs Third Party Modules.
