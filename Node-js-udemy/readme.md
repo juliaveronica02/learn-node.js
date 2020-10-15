@@ -1,3 +1,8 @@
+## Folder Structure.
+* understand-nodejs.
+* assignment-solution.
+* sequelize-section.
+
 ## Global Features vs Core Modules vs Third Party Modules.
 * Global features: keywords like const or function but also some global objects like process.
 * Core node.js modules: examples would be the file-systems module ("fs"), the path module ("path") or the http module ("http").
